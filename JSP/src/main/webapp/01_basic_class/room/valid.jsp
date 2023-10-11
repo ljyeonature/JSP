@@ -1,6 +1,17 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-    <%@ page import="apply.*" %>
+<%@ page language="java" contentType="application/json; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import="apply.*" %>
+<%
+String id = request.getParameter("id");
+ApplyDAO dao = ApplyDAO.getInstance();
+boolean result = dao.checkID(id);
+
+response.setContentType("application/json");
+
+String jsonResponse = "{\"result\":" + result + "}"; // JSON 형식으로 수정
+
+out.print(jsonResponse);
+
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,20 +19,5 @@
 <title>Insert title here</title>
 </head>
 <body>
-<%
-String id = request.getParameter("id");
-ApplyDAO dao = ApplyDAO.getInstance();
-boolean result = dao.checkID(id);
-if(result) {
-	out.println("<script>");
-	out.println("alert('아이디 중복')");
-	out.println("</script>");
-	
-} else {
-	response.sendRedirect("login.jsp");		
-	
-}
-%>
-
 </body>
 </html>

@@ -28,22 +28,7 @@
 	ApplyDAO dao = ApplyDAO.getInstance();
 	dao.insertJoin(vo);
 	
-	boolean result = dao.checkID(id);
-	
-	if(result) {
-		out.println("<script>");
-		out.println("alert('아이디 중복')");
-		out.println("</script>");
-		
-	} else {
-		response.sendRedirect("login.jsp");		
-		
-	}
-		
-	
-	
-	
-	
+	response.sendRedirect("login.jsp");		
 
 %>
 <body>
