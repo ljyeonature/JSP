@@ -38,13 +38,14 @@ TV와 VTR을 겸용으로 사용할수 있는 인체공학적 간단 리모컨�
  
  
 </pre> 
-147,000 원 
-<form method='post' action='Cart.jsp'> 
-<input type='hidden' name='id' value="1020"> 
-<input type='hidden' name='name' value="삼성 TV CT 14R1"> 
-<input type='hidden' name='price' value="147000"> 
-<input type='submit' value="장바구니"> 
-</form> 
- 
+147,000 원
+	<form method='post' action='Cart.jsp'>
+	<!--  -->
+		<input type='hidden' name='id' value="1020"> 
+		<input type='hidden' name='name' value="삼성 TV CT 14R1"> 
+		<input type='hidden' name='price' value="147000"> 
+		<input  type='submit' value="장바구니">
+	</form>
+
 </body> 
 </html> 

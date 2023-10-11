@@ -3,6 +3,8 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ page pageEncoding="UTF-8"%>
 <%@ page import="temp.*" %>
+
+<%@ page errorPage="02_NormalErrorPage.jsp" %>
 <%
 	EmpDAO dao = EmpDAO.getInstance();
 	List<EmpVO> list = dao.selectAll();

@@ -1,13 +1,27 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-
-
+<%@page import="temp.EmpDAO"%>
+<%@page import="temp.EmpVO"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <%
-
-
-
-
+	request.setCharacterEncoding("utf-8");
+	// 1. 이전 화면의 사용자 입력값 얻어오기
+	int empno = Integer.parseInt(request.getParameter("empno"));
+	String ename = request.getParameter("ename");
+	int deptno = Integer.parseInt(request.getParameter("deptno"));
+	String job = request.getParameter("job");
+	int sal = Integer.parseInt(request.getParameter("sal"));
+	
+	// 2. 얻어온 입력값들을 EmpVO의 멤버변수에 저장
+	EmpVO vo = new EmpVO();
+	vo.setEmpno(empno);
+	vo.setEname(ename);
+	vo.setDeptno(deptno);
+	vo.setJob(job);
+	vo.setSal(sal);
+	
+	// 3. EmpDAO에 insertEmp()함수로 EmpVO 객체를 전송
+	EmpDAO dao = EmpDAO.getInstance();
+	dao.insertEmp(vo);
 
 %>
 

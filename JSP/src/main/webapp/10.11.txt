@@ -1,0 +1,53 @@
+JSP 문법(10/11/수)
+0.
+	1. 설정    <%@ %>
+				`page    : import
+				`include
+				`taglib
+	2. //선언  <%! %>
+	3. 자바코드 <% %>
+	4. 표현식
+	          <%= %> 
+	          
+	롬복(lombok)
+	DAO : JDBC 연결
+	 
+	VO  : => DTO 
+	  
+	DTO
+1. 
+	EmpVO.java
+	Setter+Getter+NoArgsConstructor+ToString을 한 번에!!
+	=> @Data	
+
+3. MIME-TYPE => 자바에서는 CONTENT_TYPE
+
+4. 2_form
+	클라이언트		first.jsp	서버
+				------->
+				<-------
+				request : 요청
+				second.jsp
+				------->
+				<-------
+				response 응답
+				
+5. 3_objects
+	response.sendRedirect => 다른 페이지로 바꿉니다.
+
+6. Cookie
+	JS거 쓰세요
+7. Session
+	서버 메모리에 저장 : 보안이 더 좋아요
+	못 봐요. (브라우저 Session 아녜요!)
+	
+	세션 저장    : session.setAttribute("이름","값");
+	세션 가져오기 : session.getAttribute("이름"); => 리턴값이 객체입니다.
+	
+	세션 안의 쿠키를 사용하여 누가 들어왔는지 알 수 있도록 한다.
+	id = chunsik
+	id = babo		
+	
+	- 장바구니 : 
+	
+				
