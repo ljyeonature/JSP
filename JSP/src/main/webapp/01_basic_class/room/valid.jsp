@@ -5,19 +5,8 @@ String id = request.getParameter("id");
 ApplyDAO dao = ApplyDAO.getInstance();
 boolean result = dao.checkID(id);
 
-response.setContentType("application/json");
-
-String jsonResponse = "{\"result\":" + result + "}"; // JSON 형식으로 수정
-
-out.print(jsonResponse);
+String resultData = "NO";
+if(result) resultData = "YES";
+out.write(resultData);
 
 %>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
-</body>
-</html>

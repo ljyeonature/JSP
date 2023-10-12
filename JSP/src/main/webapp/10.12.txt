@@ -1,0 +1,85 @@
+JSP 빈즈 액션 태그(10/12/목)
+0. 액션태그
+	XML 문법을 따르기 때문에 잘 열고 잘 닫아야 함.
+	빈즈 = 자바 클래스
+	원리를 알기.
+	*****
+	1) 포워딩 : <jsp:forward page="02_forwardSecond.jsp" />
+		- 내용은 page="02_forwardSecond.jsp" 해당 페이지 내용이지만, url은 실행한 파일 경로
+		- 리다이렉트는 한 번에 해당 파일로 보여줌.
+		
+		client				server				
+				first.jsp
+				-------->   second.jsp
+				<-------
+				seconde.jsp
+
+1. 빈즈 == 자바 클래스
+	1) form의 입력필드의 name 값과 동일(각 멤버변수의 이름)
+	2) <jsps:useBean id="bean" class="info.beans.InfoBean" >
+			
+			<!-- setName / setId -->
+			<jsp:setProperty name='bean' property='*' />
+			<jsp:setProperty name='bean' property='name' />
+			<jsp:setProperty name='bean' property='id' />
+			
+		</jsps:useBean>
+2. 아이디 중복 확인 테스트 : 잘 확인하기
+	 $('#checkID').click(function(event) {
+	      event.preventDefault();
+	      var id = $('#id').val();
+	      window.open("valid.jsp?userId="+id,"","width=200, height=150");
+   
+    }); 
+	
+3. 페이지 > request > session > application(쓸 일 없지만, session보다 큰 범위)
+	1) 포워딩일 때는 request, session, application 모두 가능
+	2) 다음 페이지에 넘어갈 때, 어떤 정보들이 남아있는지.
+	3) request와 session의 범위만 잘 알아두기.
+	
+4. ajax : js : 01_js_ajax_basic
+
+	00_normal_web.jsp : 3번의 request 발생 => 동기
+	-1. 처음 웹페이지 : 00_normal_web.jsp
+	-2. 입력 후 변화  : 00_normal_web.jsp?cate=changed__by_server&name=from__server
+	-3. 웹 주소 변화(sendRedirect)-1번과 같아보이지만, 다르다는 점 
+		: response.sendRedirect("00_normal_web.jsp?"+"cate="+ cate+"&name=" + name);
+		
+	01_ajax_get_csv.jsp : 1번의 request  => 비동기
+	-1. 화면 가만히 있었음.
+	-2. 서버에 가서 데이터 받아와서 화면에 찍음
+	
+5. ajax : jquery : 02_jquery_ajax_basic	
+	사용할 상황 : 작은 부분을 변경할 때는 추천
+			    모든 화면의 요소가 대부분 바뀔 때에는 학습용으로 추천
+   1)/2) 모두 같은 내용
+   1) 기본 형식
+	   var param = { cate : "book", name : "hone" };
+	   // 비동기통신 (ajax)
+		$.ajax({
+			type    : 'post',			// 전송방식(GET/POST) : 보내는 데이터의 양과 관련 / 안 쓰면 default=브라우저마다 다르다. -> 영향이 있어서 타입은 써주는게 좋다.
+			data    : param,			// 서버로 보낼 데이터
+			dataType : 'text/html/xml'  // dataType을 씁시다!!
+			url     : '02_server.jsp',	// 서버에 요청 페이지
+			success : parseData,		// 성공 시 함수 연결
+			error   : function(){		// 실패 시 함수 연결
+				alert('error');
+			}
+		});
+   2) 축약형
+    	$.post("02_server.jsp", param, parseData);
+    	
+   3) csv  : common string value => 문자열 저장
+   4) xml  : 03_ajax_xml.jsp
+   5) json : 03_ajax_json.jsp
+   6) success 시 함수를 쓸 때는 함수를 따로 만들어 사용하는 것을 권장(함수 연결)
+
+6. 05_jquery_ajax_ex  => 비동기
+	
+	
+	
+	
+	
+	
+	
+	

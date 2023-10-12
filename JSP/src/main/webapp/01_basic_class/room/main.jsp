@@ -12,6 +12,9 @@
     %>
 <!DOCTYPE html>
 <html>
+    <script>
+    	$('#logout')
+    </script>
 <head>
 <meta charset="UTF-8">
 <title>main.jsp</title>
@@ -19,5 +22,6 @@
 <body>
 	회원가입과 로그인 모두 성공
 	<%=user %>님, 로그인 중입니다.
+	<button id="logout">로그아웃</button>
 </body>
 </html>

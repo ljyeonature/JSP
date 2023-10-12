@@ -74,12 +74,26 @@
 		        }
 		});
 		 
-		 $('#checkID').click(function(event) {
-		      event.preventDefault();
-		      var id = $("#id").val();
-		      
+		  $('#checkID').click(function(event) {
+			  event.preventDefault();
+		      /* window.open("valid.jsp?userId="+id,"","width=200, height=150"); */
+		      $.ajax({
+		    	  type : 'get',
+		    	  data : {id : $('#id').val()},
+		    	  url : 'valid.jsp',
+		    	  dataType:'text',
+		    	  success : function(result){
+		    		  if(result.trim() == "YES") {
+		    			  $("#result").text('이미 사용중인 아이디입니다');
+						} else {
+							$("#result").text('사용 가능한 아이디입니다');
+							
+						}
+		    	  }
+  
+		      });
 		   
-		    });
+		    }); 
 		 
 		 $("#del").click(function(event){
 			 event.preventDefault();
@@ -106,6 +120,7 @@
 					<label for="id">아이디</label> 
 					<input id="id" name="id" type="text" required>
 					<button id='checkID'>중복확인</button>
+					<div id="result"></div>
 				</li>
 				<li><label for="pass">비밀번호</label> 
 					<input id="pass" name="pass" type="password" required>

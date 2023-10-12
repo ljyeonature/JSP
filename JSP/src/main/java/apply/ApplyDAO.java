@@ -63,7 +63,6 @@ public class ApplyDAO {
 	 */
 	public boolean checkID(String id) throws Exception {
 		boolean result = false;
-		
 		Connection con = DriverManager.getConnection(url, user, pass);
 		
 		 String sql = "SELECT id FROM Apply WHERE id=" + "'"+id+"'";
@@ -92,7 +91,7 @@ public class ApplyDAO {
 		
 		Connection con = DriverManager.getConnection(url, user, pass);
 		
-		 String sql = "SELECT id FROM Apply WHERE id=" + "'"+id+"'" + "pass=" + "'" + passwd + "'";
+		 String sql = "SELECT id, pass FROM Apply WHERE id=" + "'"+id+"'" + " AND pass=" + "'" + passwd + "'";
 		 Statement  ps = con.createStatement();		
 		ResultSet rs = ps.executeQuery(sql);
 		if(rs.next()) {
