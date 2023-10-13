@@ -1,0 +1,47 @@
+JSP (10/13/금)
+1. DB 구성
+입력값 외의 다른 값들은 기본값으로 설정
+
+=> 날짜 : now()
+2. BoardInputForm.jsp
+	=> Board VO의 변수명이 Board의 폼의 요소의 name 같아야 한다.
+	=> 작성 버튼을 눌렀을 때, BoradSave.jsp 이동
+
+3. BoradSave.jsp
+	=> 한글 인코딩
+	=> useBean으로 setProperty 설정 : rec.set~
+	=> (Service) WriteArticleService.write(rec)
+	=> (DB) BoardDao => insert
+						=> sql 설정
+
+4. BoradList.jsp
+	=> 웹브라우저가 게시글 목록을 캐싱할 경우 새로운 글이 추가되더라도 새글이 목록에 안 보일 수 있기 때문에 설정
+	=> (Service) ListArticleService.getArticleList()
+	=> (DB) BoardDao => selectList
+						=> sql 설정
+	=> *글 상세정보 => rec.getTitle() 부분에 하이퍼링크 설정
+		=> <a href="BoardView.jsp?seq=<%=m.getSeq()%>"><%= m.getTitle() %></a>
+		=> getSeq()로 글 번호 가져오기
+		=> BoardView.jsp로 이동
+
+5. BoardView.jsp (제목/작성자/작성일자/내용/조회수)
+	=> 게시글 번호 넘겨받기
+		=> request.getParameter("seq")
+	=> (Service) ViewArticleService 서비스의 함수를 통해 getArticleById(seq)
+		=> return 값인 BorderVO를 변수(rec) 지정
+	=> (DB) BoardDao => getArticleById(id) 함수
+		=> sql처리 => BorderVO로 받아와야함.
+	=> (front) 변수(rec)를 이용해 가져올 값들을 get으로 가져오기
+	=> (front) 수정하기 : 글 번호 받기
+				=> a 태그로 href => BoardModifyForm.jsp
+	=> (front) 삭제하기 : 글 번호 받기
+				=> a 태그로 href => BoardDeleteForm.jsp
+
+6. 
+	
+	
+	
+	
+	
+	
+	

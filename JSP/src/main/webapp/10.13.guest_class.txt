@@ -1,0 +1,61 @@
+JSP (10/13/금)
+1. DB 구성
+
+2. Message VO 생성 - 빈즈(객체)
+
+3. insertMessage.jsp
+	-> saveMessage.jsp로 넘긴다. 
+	->  post로(데이터의 양과 관련하여) 
+	-> 안 넘어가는 이유 : type=button 
+	-> 왜? 유효성 검사하고 싶어서.
+
+4. saveMessage.jsp
+	=> 넘겨받는 데이터의 한글처리(request.setCharacterEncoding("utf-8"))
+	=> 화면의 입력값을 Message 클래스로 전달 
+		=> <jsp:useBean> <jsp:setProperty /> </jsp:useBean>
+		
+	=> (Service) Service 클래스의 함수 호출 => WriteMessageService.java
+		=> WriteMessageService.java 
+		=> write함수(빈즈아이디로 넘기기) 
+		=> MessageDao
+		
+	=> (DB) MessageDao.java => insert(Message rec)
+		=> sql문 처리
+		
+	=> (front) listMessage.jsp : [ 목록보기 ] 
+		=> a 태그로 글쓰기 listMessage.jsp로 이동
+
+5. listMessage.jsp
+	=> Message를 List에 담았다 
+	=> getMessageList() 함수 호출
+	=> table태그에 for문으로 각 출력 요소 출력
+		
+	=> (Service) ListMessageService.java 
+		=>  MessagDao의 selectList()
+		
+	=> (DB) MessageDao.java => selectList() 
+		=> sql처리 => List로 받아와야함.
+		
+	=> (front) listMessage.jsp : 글쓰기 => a 태그로 글쓰기 insertMessage.jsp로 이동
+	=> (front) listMessage.jsp : [삭제] => a 태그로 글쓰기 deleteMessage.jsp?mId=<%m.getMessageId()%>'로 이동
+									   => 어떤 글을 선택했는지? 알아야 한다.
+
+6. deleteMessage.jsp
+	=> 삭제할 글번호를 넘겨받기 
+		=> mId(listMessage.jsp의 삭제의 a태그에서 설정한 이름)
+		
+	=> 삭제한 글번호 알아야 하지만 숨기기(해당 글 번호를 받아야 DB에서 삭제할 수 있음)
+		=> <input type='hidden' name='messageId' value="<%=mId %>" />
+		
+	=> 삭제 버튼 클릭 시(submit) => deleteConfirm.jsp로 이동
+	=> (front) deleteConfirm.jsp
+		=> 삭제할 글 번호와 암호를 받아오기
+		
+	=> (Service) DeleteMessageService() 
+		=> 글번호 int로 처리해줌
+		=> delete(글번호, 암호) 
+		=> 삭제할 행 수 받기 => delCnt
+		
+	=> (DB) MessageDao.java => delete(int , String)
+		=> ps.executeUpdate(); 결과값이 행 수가 나옴.
+		=> result로 리턴

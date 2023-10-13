@@ -24,7 +24,7 @@
 		$.validator.addMethod("regex", function(value, element, regex){
 			  var regExp = new RegExp(regex);
 			  return regExp.test(value);
-			});
+		});
 		
 		 $('#joinForm').validate({
 		        rules : {
