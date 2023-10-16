@@ -23,8 +23,11 @@
 	/* 빈즈 id로 넘기기 */
 	service.write(m);
 %>
+
+<!-- 다른화면으로 변경 -->
+<% response.sendRedirect("listMessage.jsp"); %>
     
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -36,4 +39,4 @@
 	</font><br/><br/><br/>
 	 <a href="listMessage.jsp">[ 목록보기 ]</a>
 </body>
-</html>
+</html> -->

@@ -8,16 +8,34 @@
 	response.setHeader("Cache-Control","no-store"); // 일부 파이어폭스 버스 관련
 	response.setDateHeader("Expires", 1L);			// 현재 시간 이전으로 만료일을 지정함으로써 응답결과가 캐쉬되지 않도록 설정
 %>
-
 <%
 // 전체 메세지 레코드 검색
-
 ListArticleService service = ListArticleService.getInstance();
-List <BoardVO> mList =  service.getArticleList();
+
+int totalPageCount = service.getTotalPage(); 
+
+String pNum = request.getParameter("page");
+
+List <BoardVO> mList =  service.getArticleList(pNum);
+int groupPerPage = 3;
  
 %>
 
+
 <HTML>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+<script>
+$(function(){
+	
+$('#next').click(function(){
+	
+});	
+	
+})
+	
+
+
+</script>
 <head><title> 게시글 목록 </title>
 </head>
 
@@ -57,5 +75,10 @@ List <BoardVO> mList =  service.getArticleList();
 			</td>
 		</tr>
 	</table>
+	<button id="prev"> <span>이전</span> </button>
+	<% for(int i=1; i<=totalPageCount; i++){ %>
+		<a href='BoardList.jsp?page=<%=i%>'>[<%=i %>]</a>
+	<%} %>
+	<button id="next"> <span>다음</span> </button>
 </BODY>
 </HTML>

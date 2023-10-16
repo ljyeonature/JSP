@@ -5,7 +5,14 @@
  
 <%
 	// 전체 메세지 레코드 검색 
-	List <Message> mList =  ListMessageService.getInstance().getMessageList();
+	ListMessageService service = ListMessageService.getInstance();
+
+	int totalPageCount  	   = service.getTotalPage();
+	// 넘어오는 page 번호 값을 얻어와야 함.
+	String pNum = request.getParameter("page");
+	
+	List <Message> mList 	   =  service.getMessageList(pNum);
+	
  	
 %>    
 <!DOCTYPE html>
@@ -44,6 +51,12 @@
 	</table>
 	
 	<% } // end if-else %>
+	
+	<hr/>
+	
+	<% for(int i=1; i <= totalPageCount; i++){ %>
+		<a href='listMessage.jsp?page=<%= i%>'>[<%=i %>]</a>
+	<%} %>
 
 	<a href="insertMessage.jsp">글쓰기</a>
 </body>

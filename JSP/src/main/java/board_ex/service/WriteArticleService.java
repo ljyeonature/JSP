@@ -18,8 +18,9 @@ public class WriteArticleService {
 	public int write( BoardVO rec ) throws BoardException{
 		
 		BoardDao dao = BoardDao.getInstance();
-	
-		return dao.insert(rec);
+		dao.insert(rec);
+//		return ;
+		return dao.getMaxId();
 		
 	}
 }

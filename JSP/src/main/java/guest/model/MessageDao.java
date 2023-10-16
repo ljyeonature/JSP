@@ -132,7 +132,7 @@ public class MessageDao {
 	/* -------------------------------------------------------
 	 * 현재 페이지에 보여울 메세지 목록  얻어올 때
 	 */
-	public List<Message> selectList(int firstRow, int endRow) throws MessageException
+	public List<Message> selectList(int offset, int limit) throws MessageException
 	{
 		Connection	 		con = null;
 		PreparedStatement ps = null;
@@ -142,8 +142,25 @@ public class MessageDao {
 		
 		try{
 
+			// 1. 연결객체(Connection) 얻어오기
+			con = DriverManager.getConnection(dbUrl, dbUser, dbPass);
+			// 2. sql 문장 만들기
+			String sql = "SELECT g.* FROM  ( SELECT * FROM guesttb ORDER BY message_id desc ) g LIMIT ?, ?";
+			// 3. 전송객체 얻어오기
+			ps = con.prepareStatement(sql);
+			ps.setInt(1, offset);
+			ps.setInt(2, limit);
+			rs = ps.executeQuery();
+			while(rs.next()) {
+				isEmpty = false;
+				Message rec = new Message();
+				rec.setMessageId(rs.getInt("MESSAGE_ID"));
+				rec.setGuestName(rs.getString("GUEST_NAME"));
+				rec.setMessage(rs.getString("MESSAGE"));
+//				rec.setPassword(rs.getString("PASSWORD"));
+				mList.add(rec);
 
-			
+			}
 			if( isEmpty ) return Collections.emptyList();
 			
 			return mList;
@@ -169,7 +186,13 @@ public class MessageDao {
 		int count = 0;
 
 		try{
-
+			con = DriverManager.getConnection(dbUrl, dbUser, dbPass);
+			String sql = "SELECT COUNT(*) AS cnt FROM guesttb";
+			ps = con.prepareStatement(sql);
+			rs = ps.executeQuery();
+			if(rs.next()) {
+				count = rs.getInt("cnt");
+			}
 			return  count;
 			
 		}catch( Exception ex ){

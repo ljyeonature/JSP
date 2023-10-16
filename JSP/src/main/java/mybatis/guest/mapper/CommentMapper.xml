@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="CommentMapper"> 
+
+<insert id="insertComment" parameterType="comment">
+	INSERT INTO comment_tab
+	VALUES (
+		#{commentNo}
+		, #{userId}
+		, #{commentContent}
+		, NOW()
+	)
+</insert>
+
+<!-- // 하나를 갖고 나눠쓰면 어떨까? 전체검색과 조건검색-->
+<!-- 동적 쿼리 가능 -->
+<!-- 누가 parameter인지 알기 위해 hashmap 사용 -->
+<select id="selectComment" parameterType="hashmap" resultType="comment"> 
+	SELECT 
+ 	*
+	FROM comment_tab
+	<where>
+		<if test="commentNo != null">
+			comment_no = #{commentNo}
+		</if>
+	</where>
+</select> 
+
+<!-- 삭제 -->
+<delete id="deleteComment" parameterType="long">
+	DELETE FROM comment_tab 
+	WHERE comment_no = #{commentNo}
+</delete>
+
+<!-- 수정하기 -->       
+<update id="modifyComment" parameterType="long">
+	UPDATE comment_tab SET
+	comment_content = #{commentContent}
+	WHERE comment_no = #{commentNo}
+</update>
+
+</mapper>
