@@ -18,10 +18,11 @@
 </head>
  <body>
 	<h4> 게시판 글 수정하기 </h4><br/>
-	<form name='frm' method='post'>
-	제  목 : <input type='text' value="<%= rec.getTitle()%>"><br/><br/>
+	<form name='frm' method='post' action="BoardModify.jsp">
+	제  목 : <input type='text' value="<%= rec.getTitle()%>" name="title"><br/><br/>
 	패스워드(수정/삭제시 필요) :
-			<input type='password'><br/><br/>
+			<input type='password' name="password"><br/><br/>
+			<input type='hidden' name="seq" value="<%=seq %>"><br/><br/>
 	내  용 : <textarea name='content' rows='10' cols='40'></textarea><br/><br/>
 
 	<input type='submit' value='수정하기'>

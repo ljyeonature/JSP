@@ -221,7 +221,13 @@ public class BoardDao
 
 			con	= DriverManager.getConnection( dbUrl, dbUser, dbPass );
 			// * sql 문장만들기
+			String sql = "UPDATE board_ex SET content=?  WHERE seq=? AND pass=?";
 			// * 전송객체 얻어오기
+			ps = con.prepareStatement(sql);
+			ps.setString(1, rec.getContent());
+			ps.setInt(2, rec.getSeq());
+			ps.setString(3, rec.getPass());
+			ps.executeUpdate();
 
 			return ps.executeUpdate();
 		
