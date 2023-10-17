@@ -34,8 +34,10 @@
 	WHERE comment_no = #{commentNo}
 </delete>
 
-<!-- 수정하기 -->       
-<update id="modifyComment" parameterType="long">
+<!-- 수정하기 --> 
+<!-- 수정하고자 하는 내용과 함께 객체의 저장되어 있는 내용을 수정한 내용으로 바꾼다 
+	 글번호를 이용해서 -->      
+<update id="modifyComment" parameterType="Comment">
 	UPDATE comment_tab SET
 	comment_content = #{commentContent}
 	WHERE comment_no = #{commentNo}

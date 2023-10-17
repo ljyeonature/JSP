@@ -84,12 +84,14 @@ public class CommentRepository
 	}
 	
 	// 수정하기
-	public void modifyCommentByPK(long commentNo) {
+	// Comment VO를 인자로 받기!
+	// 값이 저장되고 저장된 값으로 가져오기
+	public void modifyCommentByPK(Comment c) {
 		//  Connection
 		SqlSession sess = getSqlSessionFactory().openSession();
 		try {
 			// pk로 검색하기 때문에 검색결과가 1개 나온다.
-			int result =  sess.update("CommentMapper.modifyComment", commentNo);
+			int result =  sess.update("CommentMapper.modifyComment", c);
 			if(result == 1) {
 				sess.commit();
 			} else {

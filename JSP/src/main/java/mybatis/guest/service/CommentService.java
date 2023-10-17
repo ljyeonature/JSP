@@ -39,8 +39,8 @@ public class CommentService {
 	}
 	
 	// 수정하기
-	public void modifyCommentByPK(long commentNo) {
-		repo.modifyCommentByPK(commentNo);
+	public void modifyCommentByPK(Comment c) {
+		repo.modifyCommentByPK(c);
 	}
 
 }
