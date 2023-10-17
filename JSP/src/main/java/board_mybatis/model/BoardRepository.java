@@ -75,18 +75,19 @@ public class BoardRepository {
 			sess.close();
 		}
 	}
-	
+	// 게시글 삭제제
 	public int deleteBoard(int article_id, String pass) {
 		SqlSession sess = getSqlSessionFactory().openSession();
 		try {
-			BoardVO b = new BoardVO();
-			b.setSeq(article_id);
-			b.setPass(pass);
-			/*
-			 * HashMap map = new HashMap(); map.put("seq", article_id); map.put("password",
-			 * password);
-			 */
-			int result = sess.delete("BoardMapper.deleteBoardByPK", b);
+	//			BoardVO b = new BoardVO();
+	//			b.setSeq(article_id);
+	//			b.setPass(pass);
+			
+			  HashMap map = new HashMap(); 
+			  map.put("seq", article_id); 
+			  map.put("password",pass);
+			 
+			int result = sess.delete("BoardMapper.deleteBoardByPK", map);
 			System.out.println("deleteBoard : " + result);
 			if(result == 1) {
 				sess.commit();
@@ -99,7 +100,7 @@ public class BoardRepository {
 			sess.close();
 		}
 	}
-	
+	// 게시글 글을 쓰고 난 뒤에 바로 상세보기로 가기 위한 작업 : 가장 큰 seq로 이동(최신)
 	public int getMaxId() {
 		SqlSession sess = getSqlSessionFactory().openSession();
 		try {
