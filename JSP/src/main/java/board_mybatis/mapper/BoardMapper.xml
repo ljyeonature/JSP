@@ -33,7 +33,7 @@
 	WHERE	seq = #{article_id}
 </select>
 
-<delete id="deleteBoardByPK" parameterType="BoardVO">
+<delete id="deleteBoardByPK" parameterType="hashmap">
 	DELETE FROM board_ex WHERE seq = #{seq} AND pass = #{password}
 </delete>
 
