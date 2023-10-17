@@ -17,7 +17,7 @@
 </head>
 <body>
 <h1>수정</h1>
-	<form name="frm" action="modifyComment.jsp" method="get">
+	<form name="frm" action="modifyComment.jsp" method="post">
 <table>
 	<tr><td>글번호</td><td><input type="text" name="cId" size="3" value="<%= commentNo%>"/></td></tr>
 	<tr><td>작성자</td><td><input type="text" name="userId" size="15" value="<%=comment.getUserId()%>"/></td></tr>

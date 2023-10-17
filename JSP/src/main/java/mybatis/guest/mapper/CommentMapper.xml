@@ -17,6 +17,13 @@
 <!-- // 하나를 갖고 나눠쓰면 어떨까? 전체검색과 조건검색-->
 <!-- 동적 쿼리 가능 -->
 <!-- 누가 parameter인지 알기 위해 hashmap 사용 -->
+<!-- [2] -->
+<!-- 
+<if test="user_id != null">
+	user_id LIKE '%${user_id}%'
+</if> 
+-->
+<!-- [1] -->
 <select id="selectComment" parameterType="hashmap" resultType="comment"> 
 	SELECT 
  	*
@@ -25,8 +32,22 @@
 		<if test="commentNo != null">
 			comment_no = #{commentNo}
 		</if>
+
+		<if test="searchKey != null">
+			${searchKey} LIKE '%${searchWord}%'
+		</if>
 	</where>
 </select> 
+
+<!-- 
+	JDBC 전송객체
+	- Statement
+	- PreparedStatement : 문자열지정시 '' 자동처리
+	
+	Mybatis 에서 
+		- Statement 역할 : ${변수명} -> 딱 변수만 처리(''없음)
+		- PreparedStatement 역할 : #{변수명}
+ -->
 
 <!-- 삭제 -->
 <delete id="deleteComment" parameterType="long">

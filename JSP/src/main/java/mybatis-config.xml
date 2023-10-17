@@ -13,6 +13,8 @@
 	<!-- 별칭 주기 -->
 	<typeAliases>
 		<typeAlias type="mybatis.guest.model.Comment" alias='comment'/>
+		<typeAlias type="board_mybatis.model.BoardVO" alias='BoardVO'/>
+		<typeAlias type="emp_mybatis.EmpVO" alias='EmpVO'/>
 	</typeAliases>
 	
 	 <environments default="development">
@@ -29,5 +31,7 @@
 
 	 <mappers>
 	 	<mapper resource="mybatis/guest/mapper/CommentMapper.xml"/>
+	 	<mapper resource="board_mybatis/mapper/BoardMapper.xml"/>
+	 	<mapper resource="emp_mybatis/EmpMapper.xml"/>
 	 </mappers>
 </configuration>

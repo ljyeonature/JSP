@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+ 
+<mapper namespace="BoardMapper"> 
+<!-- 전체 게시글 목록 보기 -->
+<!-- 동적으로 만들어도 된다. -->
+<select id="selectBoard" resultType="BoardVO">
+	SELECT seq, title, writer, regdate, cnt 
+	FROM board_ex;
+	<!-- <where>
+		<if test="seq != null">
+			seq = #{seq}
+		</if>
+	</where> -->
+</select>
+
+<insert id="insertBoard" parameterType="BoardVO">
+	INSERT INTO board_ex(title, writer, content, pass, regdate, cnt)
+	VALUES ( #{title}, 
+			#{writer}, 
+			#{content}, 
+			#{pass}, 
+			now(), 
+			0 );
+	
+</insert>
+
+<select id="selectBoardByPK" parameterType="int" resultType="BoardVO">
+	SELECT *
+	FROM 	board_ex
+	WHERE	seq = #{article_id}
+</select>
+
+<delete id="deleteBoardByPK" parameterType="BoardVO">
+	DELETE FROM board_ex WHERE seq = #{seq} AND pass = #{password}
+</delete>
+
+<!-- getMexId -->
+<select id="getMaxId" resultType="int">
+	SELECT max(seq) AS max FROM board_ex
+</select>
+</mapper>

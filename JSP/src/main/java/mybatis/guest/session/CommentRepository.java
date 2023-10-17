@@ -42,12 +42,27 @@ public class CommentRepository
 		// sess를 끊는 것이 아닌 객체 반환
 		sess.close();
 	}
-	//  목록보기
-	public List<Comment> selectComment(){
+	//  목록보기 => 검색창
+	public List<Comment> selectComment(String searchKey, String searchWord){
 		//  Connection
 		SqlSession sess = getSqlSessionFactory().openSession();
 		try {
-			return sess.selectList("CommentMapper.selectComment");
+			/*
+			 * [1] key			value
+			 * 	  searchKey		user_id
+			 * 	  searchWord	입력값
+			 * 
+			 * [2] key			value
+			 * 	  user_id		입력값
+			 * 	  
+			 */
+			// [2]
+			HashMap map = new HashMap();
+//			map.put(searchKey, searchWord);
+			map.put("searchKey", searchKey);
+			map.put("searchWord", searchWord);
+			
+			return sess.selectList("CommentMapper.selectComment", map);
 		} finally {
 			sess.close();
 		}

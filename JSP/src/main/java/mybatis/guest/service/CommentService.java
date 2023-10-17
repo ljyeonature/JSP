@@ -23,9 +23,12 @@ public class CommentService {
 		repo.insertComment(vo);
 	}
 	// 목록보기
-	public List<Comment> selectComment() {
-		
-		return repo.selectComment();
+	public List<Comment> selectComment(String searchKey, String searchWord) {
+		// 확인
+		System.out.println(searchKey + "/" + searchWord);
+		List<Comment> list = repo.selectComment(searchKey, searchWord);
+		System.out.println("CommentService.selectComment : " + list.size());
+		return list;
 	}
 	
 	// 상세보기
