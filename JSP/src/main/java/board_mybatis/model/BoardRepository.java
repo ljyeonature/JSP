@@ -79,14 +79,15 @@ public class BoardRepository {
 	public int deleteBoard(int article_id, String pass) {
 		SqlSession sess = getSqlSessionFactory().openSession();
 		try {
-			BoardVO b = new BoardVO();
-			b.setSeq(article_id);
-			b.setPass(pass);
-			/*
-			 * HashMap map = new HashMap(); map.put("seq", article_id); map.put("password",
-			 * password);
-			 */
-			int result = sess.delete("BoardMapper.deleteBoardByPK", b);
+//			BoardVO b = new BoardVO();
+//			b.setSeq(article_id);
+//			b.setPass(pass);
+			
+			  HashMap map = new HashMap(); 
+			  map.put("seq", article_id); 
+			  map.put("password",pass);
+			 
+			int result = sess.delete("BoardMapper.deleteBoardByPK", map);
 			System.out.println("deleteBoard : " + result);
 			if(result == 1) {
 				sess.commit();
@@ -105,8 +106,8 @@ public class BoardRepository {
 		try {
 			int result = sess.selectOne("BoardMapper.getMaxId");
 			System.out.println("getMaxId : " + result);
-			return result;
 			
+			return result;
 			
 		}finally {
 			sess.close();
@@ -119,6 +120,11 @@ public class BoardRepository {
 		try {
 			int result = sess.update("BoardMapper.updateBoard",rec);
 			System.out.println("updateBoard : " + result);
+			if(result == 1) {
+				sess.commit();
+			} else {
+				sess.rollback();
+			}
 			return result;
 		}finally {
 			sess.close();

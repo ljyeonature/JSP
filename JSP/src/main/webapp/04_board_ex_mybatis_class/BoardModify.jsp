@@ -12,7 +12,7 @@
 %>
 
 <!-- 1. 이전 화면의 입력값을 넘겨받아 BoardVO 객체의 각 멤버변수로 지정 -->
-<jsp:useBean id="b" class="board_ex.model.BoardVO">
+<jsp:useBean id="b" class="board_mybatis.model.BoardVO">
 	<jsp:setProperty name="b" property="seq" value="<%=seq %>"/>
 	<jsp:setProperty name="b" property="title" value="<%=title %>"/>
 	<jsp:setProperty name="b" property="content" value="<%=content %>"/>

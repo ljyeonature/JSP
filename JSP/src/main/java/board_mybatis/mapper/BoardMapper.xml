@@ -33,7 +33,7 @@
 	WHERE	seq = #{article_id}
 </select>
 
-<delete id="deleteBoardByPK" parameterType="BoardVO">
+<delete id="deleteBoardByPK" parameterType="hashmap">
 	DELETE FROM board_ex WHERE seq = #{seq} AND pass = #{password}
 </delete>
 
@@ -41,4 +41,13 @@
 <select id="getMaxId" resultType="int">
 	SELECT max(seq) AS max FROM board_ex
 </select>
+
+<update id="updateBoard">
+		UPDATE board_ex 
+		SET content=#{content} 
+		WHERE seq=#{seq} AND pass=#{pass}
+</update>
+
+
+
 </mapper>
